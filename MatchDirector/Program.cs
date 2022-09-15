@@ -29,8 +29,8 @@ namespace MatchDirector
 {
     class Program
     {
-        private const string ProjectId = "REPLACE_PROJECT_ID"
-        private const string BackendUrl = "http://om-backend.open-match.svc.cluster.local:50505";
+        private const string ProjectId = "REPLACE_PROJECT_ID";
+        private const string BackendUrl = "http://open-match-backend.open-match.svc.cluster.local:50505";
         private const string MatchFunctionUrl = "demo-matchfunction.demo.svc.cluster.local";
         private const int MatchFunctionPort = 50502;
         private const int TaskDealyMillisecondsDelay = 5000;

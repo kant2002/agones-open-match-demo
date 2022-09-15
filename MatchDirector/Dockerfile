@@ -1,6 +1,6 @@
 ARG CONFIGURATION=Debug
 
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS base
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS base
 WORKDIR /app
 
 FROM base AS build
@@ -21,7 +21,7 @@ ARG CONFIGURATION
 
 RUN dotnet publish -c ${CONFIGURATION} -o /app
 
-FROM base AS final
+FROM mcr.microsoft.com/dotnet/runtime:6.0 AS final
 WORKDIR /app
 
 COPY --from=publish /app .

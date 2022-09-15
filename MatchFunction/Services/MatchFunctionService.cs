@@ -24,7 +24,7 @@ namespace MatchFunction.Services
 
     public class MatchFunctionService : MatchFunctionBase
     {
-        private const string QueryUrl = "http://om-query.open-match.svc.cluster.local:50503";
+        private const string QueryUrl = "http://open-match-query.open-match.svc.cluster.local:50503";
         private const string MatchFunctionName = "multi";
         private const int MatchingCount = 2;
         private const int ApiTimeout = 5;

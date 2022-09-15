@@ -15,7 +15,7 @@ namespace MatchFrontend.Controllers
     [Route("[controller]")]
     public class MatchController : ControllerBase
     {
-        private const string FrontendUrl = "http://om-frontend.open-match.svc.cluster.local:50504";
+        private const string FrontendUrl = "http://open-match-frontend.open-match.svc.cluster.local:50504";
 
         public MatchController()
         {
