@@ -1,32 +1,21 @@
-ARG CONFIGURATION=Debug
+#See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
 
-FROM mcr.microsoft.com/dotnet/runtime:6.0 AS runtime
+FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
 WORKDIR /app
+EXPOSE 80
 
-FROM mcr.microsoft.com/dotnet/sdk:6.0 AS base
-WORKDIR /app
-
-FROM base AS build
-WORKDIR /build
-
-ARG CONFIGURATION
-
-COPY MatchFunction.csproj .
-RUN dotnet restore
-
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+WORKDIR /src
+COPY ["MatchFunction/MatchFunction.csproj", "MatchFunction/"]
+RUN dotnet restore "MatchFunction/MatchFunction.csproj"
 COPY . .
-RUN dotnet build -c ${CONFIGURATION} -o /app
+WORKDIR "/src/MatchFunction"
+RUN dotnet build "MatchFunction.csproj" -c Release -o /app/build
 
 FROM build AS publish
-WORKDIR /build
+RUN dotnet publish "MatchFunction.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
-ARG CONFIGURATION
-
-RUN dotnet publish -c ${CONFIGURATION} -o /app
-
-FROM runtime AS final
+FROM base AS final
 WORKDIR /app
-
-COPY --from=publish /app .
-
+COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "MatchFunction.dll"]

@@ -3,3 +3,4 @@ MatchDirector/credential.json
 */obj
 solution.yaml
 .vs/
+*.user

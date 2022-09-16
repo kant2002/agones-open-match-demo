@@ -1,11 +1,7 @@
-using Grpc.Core;
 using Grpc.Net.Client;
-using Microsoft.AspNetCore.Mvc;
 using OpenMatch;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Cache;
-using System.Reflection.Metadata;
 using System.Threading.Tasks;
 using System.Threading;
 using System;
@@ -29,7 +25,7 @@ namespace MatchFunction.Services
         private const int MatchingCount = 2;
         private const int ApiTimeout = 5;
 
-        public async override Task Run(RunRequest request, grpc::IServerStreamWriter<global::OpenMatch.RunResponse> responseStream, grpc::ServerCallContext context)
+        public async override Task Run(RunRequest request, grpc::IServerStreamWriter<RunResponse> responseStream, grpc::ServerCallContext context)
         {
             AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
 
